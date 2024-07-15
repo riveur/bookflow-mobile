@@ -1,3 +1,4 @@
+import { SessionProvider } from '@/components/SessionProvider';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import tamaguiConfig from '@/tamagui.config';
 import { Inter_400Regular, Inter_900Black } from '@expo-google-fonts/inter';
@@ -17,7 +18,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: 'index',
+  initialRouteName: '(protected)',
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -52,12 +53,16 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme ?? undefined}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="index" options={{ title: "Home" }} />
-        </Stack>
-      </ThemeProvider>
-    </TamaguiProvider>
+    <SessionProvider>
+      <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme ?? undefined}>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <Stack>
+            <Stack.Screen name="(protected)" options={{ headerShown: false }} />
+            <Stack.Screen name="auth/login" options={{ headerShown: false }} />
+            <Stack.Screen name="auth/register" options={{ headerShown: false }} />
+          </Stack>
+        </ThemeProvider>
+      </TamaguiProvider>
+    </SessionProvider>
   );
 }

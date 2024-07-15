@@ -1,7 +1,9 @@
 import { Inter_400Regular, Inter_900Black } from '@expo-google-fonts/inter';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
+import * as NavigationBar from 'expo-navigation-bar';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
@@ -9,8 +11,8 @@ import 'react-native-reanimated';
 import { TamaguiProvider } from 'tamagui';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { useThemeColor } from '@/hooks/useThemeColor';
 import tamaguiConfig from '@/tamagui.config';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -54,6 +56,9 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
+  const navigationBarColor = useThemeColor({}, 'background')
+
+  NavigationBar.setBackgroundColorAsync(navigationBarColor);
 
   return (
     <QueryClientProvider client={queryClient}>

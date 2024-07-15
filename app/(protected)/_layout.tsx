@@ -1,16 +1,10 @@
+import { useSessionStore } from '@/stores/useSessionStore';
 import { Redirect, Stack } from 'expo-router';
-import { Text } from '@/components/ui/Text';
-import { useSession } from '@/components/SessionProvider';
-import { getTokens } from 'tamagui';
 
 export default function Layout() {
-  const { session, isLoading } = useSession();
+  const { token } = useSessionStore();
 
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
-
-  if (!session) {
+  if (!token) {
     return <Redirect href="/auth/login" />;
   }
 

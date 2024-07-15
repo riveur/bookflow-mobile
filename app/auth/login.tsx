@@ -1,4 +1,7 @@
-import { useSession } from "@/components/SessionProvider";
+import { router } from "expo-router";
+import { useForm } from "react-hook-form";
+import { Button, Input, Spinner, YStack } from "tamagui";
+
 import {
   Form,
   FormContent,
@@ -10,32 +13,54 @@ import {
   FormTrigger
 } from "@/components/ui/Form";
 import { Text } from "@/components/ui/Text";
-import { Link, router } from "expo-router";
-import { useForm } from "react-hook-form";
-import { Button, Input, Spinner, YStack } from "tamagui";
+import { View } from "@/components/ui/View";
+import { login } from "@/lib/client";
+import { LoginSchema } from "@/lib/validation";
+import { useSessionStore } from "@/stores/useSessionStore";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { HTTPError } from "ky";
 
 export default function LoginScreen() {
+  const sessionStore = useSessionStore();
   const form = useForm<{ email: string, password: string }>({
+    resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
-  const { signIn } = useSession();
   const onSubmit = form.handleSubmit(async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    signIn(data.email, data.password);
-    router.replace("/");
+    try {
+      const result = await login(data.email, data.password);
+      sessionStore.init({ token: result.token });
+      router.replace("/");
+    } catch (error: unknown) {
+      if (error instanceof HTTPError) {
+        const data = await error.response.json();
+        if (data.message) {
+          form.setError('root', { message: data.message });
+        }
+      }
+
+      form.setError('root', { message: 'Une erreur est survenue' });
+    }
   });
   return (
     <YStack flex={1} padding="$8" gap="$8" justifyContent="center">
       <Text fontSize={40} fontWeight="bold" textAlign="center">
-        Runder
+        Bookflow
       </Text>
       <YStack gap="$4">
         <Text fontSize={25} fontWeight="bold">Se connecter</Text>
+        {form.formState.errors.root && (
+          <View padding="$2.5" borderColor="$red10" borderWidth="$0.25" borderRadius="$4">
+            <Text color="red" textAlign="center">
+              {form.formState.errors.root.message}
+            </Text>
+          </View>
+        )}
         <Form {...form}>
-          <FormContent gap="$4" onSubmit={onSubmit}>
+          <FormContent gap="$2" onSubmit={onSubmit}>
             <FormField
               control={form.control}
               name="email"
@@ -46,6 +71,7 @@ export default function LoginScreen() {
                     <Input
                       placeholder="john.doe@example.com"
                       inputMode="email"
+                      autoCapitalize="none"
                       onChangeText={field.onChange}
                       onBlur={field.onBlur}
                       value={field.value}
@@ -66,6 +92,7 @@ export default function LoginScreen() {
                   <FormControl>
                     <Input
                       placeholder="********"
+                      autoCapitalize="none"
                       secureTextEntry
                       onChangeText={field.onChange}
                       onBlur={field.onBlur}
@@ -78,19 +105,14 @@ export default function LoginScreen() {
             />
             <FormTrigger asChild>
               <Button
-                theme="green"
                 disabled={form.formState.isSubmitting}
                 icon={form.formState.isSubmitting ? <Spinner /> : undefined}
               >
-                Rejoindre
+                Confirmer
               </Button>
             </FormTrigger>
           </FormContent>
         </Form>
-        <Text textAlign="center">
-          Pas de compte ?{" "}
-          <Link replace href="auth/register" style={{ fontWeight: "bold" }}>S'inscrire</Link>
-        </Text>
       </YStack>
     </YStack>
   );

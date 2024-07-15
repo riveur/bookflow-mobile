@@ -7,7 +7,8 @@ import {
   FormProvider,
   useFormContext,
 } from 'react-hook-form';
-import { Label, ViewProps, YStack, Form as DefaultForm } from 'tamagui';
+import { Form as DefaultForm, Label, ViewProps, YStack } from 'tamagui';
+
 import { Text, TextProps } from '@/components/ui/Text';
 import { View } from '@/components/ui/View';
 
@@ -89,7 +90,7 @@ FormItem.displayName = "FormItem"
 const FormLabel = React.forwardRef<
   React.ElementRef<typeof Label>,
   React.ComponentPropsWithoutRef<typeof Label>
->(({style, ...props}, ref) => {
+>(({ style, ...props }, ref) => {
   const { error, formItemId } = useFormField()
 
   return (
@@ -133,7 +134,7 @@ const FormDescription = (props: TextProps) => {
   )
 }
 
-const FormMessage = ({ children, style, ...props }: TextProps) => {
+const FormMessage = ({ children, ...props }: TextProps) => {
   const { error, formMessageId } = useFormField()
   const body = error ? String(error?.message) : children
 
@@ -143,8 +144,8 @@ const FormMessage = ({ children, style, ...props }: TextProps) => {
 
   return (
     <Text
-      color="red"
       id={formMessageId}
+      color={error ? "red" : props.color}
       {...props}
     >
       {body}
@@ -153,14 +154,15 @@ const FormMessage = ({ children, style, ...props }: TextProps) => {
 }
 
 export {
-  useFormField,
   Form,
   FormContent,
-  FormTrigger,
-  FormItem,
-  FormLabel,
   FormControl,
   FormDescription,
-  FormMessage,
   FormField,
-}
+  FormItem,
+  FormLabel,
+  FormMessage,
+  FormTrigger,
+  useFormField
+};
+

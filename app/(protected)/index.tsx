@@ -1,26 +1,21 @@
-import { useSession } from '@/components/SessionProvider';
-import { Text } from '@/components/ui/Text';
-import { StyleSheet } from 'react-native';
 import { Button, YStack } from 'tamagui';
 
+import { Text } from '@/components/ui/Text';
+import { useAuth } from '@/hooks/useAuth';
+import { logout } from '@/lib/client';
+import { useSessionStore } from '@/stores/useSessionStore';
+
 export default function HomeScreen() {
-  const { session, signOut } = useSession();
+  const { data: user } = useAuth();
+  const { clear } = useSessionStore();
   return (
     <YStack padding="$4" gap="$2">
-      <Text style={styles.title}>Gaming App</Text>
-      {session && (
+      {user && (
         <>
-          <Text>Welcome, {session}</Text>
-          <Button theme="red" onPress={() => signOut()}>Logout</Button>
+          <Text>Bienvenue, {user.fullname}</Text>
+          <Button theme="red" onPress={() => logout().then(() => clear())}>Logout</Button>
         </>
       )}
     </YStack>
   );
 }
-
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-});

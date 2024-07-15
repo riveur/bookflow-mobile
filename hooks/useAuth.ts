@@ -8,7 +8,7 @@ export const useAuth = () => {
   const { clear } = useSessionStore();
 
   const query = useQuery({
-    queryKey: ['auth'],
+    queryKey: ["auth"],
     queryFn: getCurrentUserInformations,
     retry: 1,
   });
@@ -17,11 +17,11 @@ export const useAuth = () => {
     if (query.error) {
       clear();
     }
-  }, [query.error]);
+  }, [query.error, clear]);
 
-  const roleIs = (role: User['role']) => {
+  const roleIs = (role: User["role"]) => {
     return query.data?.role === role;
-  }
+  };
 
   return { ...query, roleIs };
-}
+};

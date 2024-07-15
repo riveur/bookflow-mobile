@@ -8,7 +8,7 @@ export const useAddBookExampleMutation = (isbn: string) => {
   return useMutation({
     mutationFn: (data: CreateExampleInput) => addBookExample(isbn, data),
     onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ['books', isbn] })
+      queryClient.invalidateQueries({ queryKey: ["books", isbn] });
     },
-  })
-}
+  });
+};

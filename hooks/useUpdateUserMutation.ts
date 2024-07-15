@@ -10,6 +10,6 @@ export function useUpdateUserMutation(userId: string) {
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["users"] });
       queryClient.invalidateQueries({ queryKey: ["users", userId] });
-    }
+    },
   });
 }

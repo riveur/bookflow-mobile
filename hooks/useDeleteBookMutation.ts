@@ -9,6 +9,6 @@ export function useDeleteBookMutation() {
     onSuccess(_, isbn) {
       queryClient.invalidateQueries({ queryKey: ["books"] });
       queryClient.invalidateQueries({ queryKey: ["books", isbn] });
-    }
+    },
   });
 }

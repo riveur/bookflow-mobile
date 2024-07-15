@@ -8,6 +8,6 @@ export const useAddUserMutation = () => {
     mutationFn: addUser,
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["users"] });
-    }
+    },
   });
-}
+};

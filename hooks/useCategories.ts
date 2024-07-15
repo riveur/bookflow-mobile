@@ -7,6 +7,6 @@ export const useCategories = () => {
   return useQuery({
     queryKey: ["categories"],
     queryFn: getCategories,
-    enabled: !!user
+    enabled: !!user,
   });
-}
+};

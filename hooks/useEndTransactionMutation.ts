@@ -9,6 +9,6 @@ export const useEndTransactionMutation = (transaction: Transaction) => {
     mutationFn: () => endTransaction(transaction.user_id, transaction.id),
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["my-transactions"] });
-    }
+    },
   });
-}
+};

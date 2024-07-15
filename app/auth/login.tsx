@@ -11,7 +11,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  FormTrigger
+  FormTrigger,
 } from "@/components/ui/Form";
 import { Text } from "@/components/ui/Text";
 import { View } from "@/components/ui/View";
@@ -22,7 +22,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function LoginScreen() {
   const sessionStore = useSessionStore();
-  const form = useForm<{ email: string, password: string }>({
+  const form = useForm<{ email: string; password: string }>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: "",
@@ -38,22 +38,35 @@ export default function LoginScreen() {
       if (error instanceof HTTPError) {
         const data = await error.response.json();
         if (data.message) {
-          form.setError('root', { message: data.message });
+          form.setError("root", { message: data.message });
         }
       }
 
-      form.setError('root', { message: 'Une erreur est survenue' });
+      form.setError("root", { message: "Une erreur est survenue" });
     }
   });
   return (
-    <YStack backgroundColor="$background" flex={1} padding="$8" gap="$8" justifyContent="center">
+    <YStack
+      backgroundColor="$background"
+      flex={1}
+      padding="$8"
+      gap="$8"
+      justifyContent="center"
+    >
       <Text fontSize={40} fontWeight="bold" textAlign="center">
         Bookflow
       </Text>
       <YStack gap="$4">
-        <Text fontSize={25} fontWeight="bold">Se connecter</Text>
+        <Text fontSize={25} fontWeight="bold">
+          Se connecter
+        </Text>
         {form.formState.errors.root && (
-          <View padding="$2.5" borderColor="$red10" borderWidth="$0.25" borderRadius="$4">
+          <View
+            padding="$2.5"
+            borderColor="$red10"
+            borderWidth="$0.25"
+            borderRadius="$4"
+          >
             <Text color="red" textAlign="center">
               {form.formState.errors.root.message}
             </Text>
@@ -81,8 +94,7 @@ export default function LoginScreen() {
                 </FormItem>
               )}
             />
-            <YStack>
-            </YStack>
+            <YStack></YStack>
             <FormField
               control={form.control}
               name="password"

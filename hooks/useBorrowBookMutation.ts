@@ -8,6 +8,6 @@ export const useBorrowBookMutation = (isbn: string) => {
     mutationFn: addTransaction,
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ["books", isbn, "examples"] });
-    }
-  })
-}
+    },
+  });
+};

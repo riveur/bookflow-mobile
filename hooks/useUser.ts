@@ -9,4 +9,4 @@ export const useUser = (userId: string) => {
     queryFn: () => getUser(userId),
     enabled: !!user,
   });
-}
+};

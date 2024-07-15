@@ -8,7 +8,9 @@ export const useReadNotificationMutation = (notification: Notification) => {
   return useMutation({
     mutationFn: () => readNotification(notification.user_id, notification.id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['notifications', notification.id] });
-    }
+      queryClient.invalidateQueries({
+        queryKey: ["notifications", notification.id],
+      });
+    },
   });
-}
+};

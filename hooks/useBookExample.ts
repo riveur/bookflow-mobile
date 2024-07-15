@@ -17,4 +17,4 @@ export const useBookExample = ({ params, enabled }: UseBookExampleParams) => {
     queryFn: () => getBookExample(params.isbn, params.exampleId),
     enabled: !!user && enabled,
   });
-}
+};

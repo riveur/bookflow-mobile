@@ -9,4 +9,4 @@ export const useBookExamples = (isbn: string, enabled: boolean) => {
     queryFn: () => getBookExamples(isbn),
     enabled: !!user && enabled,
   });
-}
+};

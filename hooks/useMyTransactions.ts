@@ -10,4 +10,4 @@ export const useMyTransactions = () => {
     queryFn: getMyTransactions,
     enabled: !!user,
   });
-}
+};

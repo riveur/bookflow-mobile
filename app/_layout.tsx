@@ -1,25 +1,25 @@
-import { Inter_400Regular, Inter_900Black } from '@expo-google-fonts/inter';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { useFonts } from 'expo-font';
-import * as NavigationBar from 'expo-navigation-bar';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-import { TamaguiProvider, useTheme } from 'tamagui';
+import { Inter_400Regular, Inter_900Black } from "@expo-google-fonts/inter";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useFonts } from "expo-font";
+import * as NavigationBar from "expo-navigation-bar";
+import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
+import "react-native-reanimated";
+import { TamaguiProvider, useTheme } from "tamagui";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
-import tamaguiConfig from '@/tamagui.config';
+import { useColorScheme } from "@/hooks/useColorScheme";
+import tamaguiConfig from "@/tamagui.config";
 
 export {
   // Catch any errors thrown by the Layout component.
-  ErrorBoundary
-} from 'expo-router';
+  ErrorBoundary,
+} from "expo-router";
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(protected)',
+  initialRouteName: "(protected)",
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -60,7 +60,10 @@ function RootLayoutNav() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme ?? undefined}>
+      <TamaguiProvider
+        config={tamaguiConfig}
+        defaultTheme={colorScheme ?? undefined}
+      >
         <Stack>
           <Stack.Screen name="(protected)" options={{ headerShown: false }} />
           <Stack.Screen name="auth/login" options={{ headerShown: false }} />

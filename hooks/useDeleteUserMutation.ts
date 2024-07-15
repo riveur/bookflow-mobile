@@ -9,6 +9,6 @@ export function useDeleteUserMutation() {
     onSuccess(_, userId) {
       queryClient.invalidateQueries({ queryKey: ["users"] });
       queryClient.invalidateQueries({ queryKey: ["users", userId] });
-    }
+    },
   });
 }

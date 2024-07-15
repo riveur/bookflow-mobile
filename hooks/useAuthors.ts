@@ -7,6 +7,6 @@ export const useAuthors = () => {
   return useQuery({
     queryKey: ["authors"],
     queryFn: getAuthors,
-    enabled: !!user
+    enabled: !!user,
   });
-}
+};

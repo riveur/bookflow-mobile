@@ -9,4 +9,4 @@ export const useBook = (isbn: string) => {
     queryFn: () => getBook(isbn),
     enabled: !!user,
   });
-}
+};

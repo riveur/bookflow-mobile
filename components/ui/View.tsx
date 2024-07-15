@@ -1,16 +1,12 @@
-import { useThemeColor } from '@/hooks/useThemeColor';
-import { View as DefaultView, ViewProps as DefaultViewProps } from 'tamagui';
+import {
+  View as DefaultView,
+  ViewProps,
+  useTheme
+} from 'tamagui';
 
-type ThemeProps = {
-  lightColor?: string;
-  darkColor?: string;
-};
-
-export type ViewProps = ThemeProps & DefaultViewProps;
 
 export function View(props: ViewProps) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
-  const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
+  const theme = useTheme();
 
-  return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
+  return <DefaultView backgroundColor={theme.background.val} {...props} />;
 }

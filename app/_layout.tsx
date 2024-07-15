@@ -1,6 +1,5 @@
 import { Inter_400Regular, Inter_900Black } from '@expo-google-fonts/inter';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import * as NavigationBar from 'expo-navigation-bar';
@@ -8,10 +7,9 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-import { TamaguiProvider } from 'tamagui';
+import { TamaguiProvider, useTheme } from 'tamagui';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { useThemeColor } from '@/hooks/useThemeColor';
 import tamaguiConfig from '@/tamagui.config';
 
 export {
@@ -56,19 +54,17 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-  const navigationBarColor = useThemeColor({}, 'background')
+  const theme = useTheme();
 
-  NavigationBar.setBackgroundColorAsync(navigationBarColor);
+  NavigationBar.setBackgroundColorAsync(theme.background.val);
 
   return (
     <QueryClientProvider client={queryClient}>
       <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme ?? undefined}>
-        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-          <Stack>
-            <Stack.Screen name="(protected)" options={{ headerShown: false }} />
-            <Stack.Screen name="auth/login" options={{ headerShown: false }} />
-          </Stack>
-        </ThemeProvider>
+        <Stack>
+          <Stack.Screen name="(protected)" options={{ headerShown: false }} />
+          <Stack.Screen name="auth/login" options={{ headerShown: false }} />
+        </Stack>
       </TamaguiProvider>
     </QueryClientProvider>
   );

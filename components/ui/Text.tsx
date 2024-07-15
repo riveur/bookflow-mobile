@@ -1,16 +1,7 @@
-import { useThemeColor } from '@/hooks/useThemeColor';
-import { Text as DefaultText, TextProps as DefaultTextProps } from 'tamagui';
-
-type ThemeProps = {
-  lightColor?: string;
-  darkColor?: string;
-};
-
-export type TextProps = ThemeProps & DefaultTextProps;
+import { Text as DefaultText, TextProps, useTheme } from 'tamagui';
 
 export function Text(props: TextProps) {
-  const { style, lightColor, darkColor, ...otherProps } = props;
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+  const theme = useTheme();
 
-  return <DefaultText style={[{ color }, style]} {...otherProps} />;
+  return <DefaultText color={theme.color.val} {...props} />;
 }

@@ -7,9 +7,9 @@ import {
   FormProvider,
   useFormContext,
 } from 'react-hook-form';
-import { Form as DefaultForm, Label, ViewProps, YStack } from 'tamagui';
+import { Form as DefaultForm, Label, TextProps, ViewProps, YStack } from 'tamagui';
 
-import { Text, TextProps } from '@/components/ui/Text';
+import { Text } from '@/components/ui/Text';
 import { View } from '@/components/ui/View';
 
 const Form = FormProvider

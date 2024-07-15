@@ -1,4 +1,5 @@
 import { router } from "expo-router";
+import { HTTPError } from "ky";
 import { useForm } from "react-hook-form";
 import { Button, Input, Spinner, YStack } from "tamagui";
 
@@ -18,7 +19,6 @@ import { login } from "@/lib/client";
 import { LoginSchema } from "@/lib/validation";
 import { useSessionStore } from "@/stores/useSessionStore";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { HTTPError } from "ky";
 
 export default function LoginScreen() {
   const sessionStore = useSessionStore();
@@ -46,7 +46,7 @@ export default function LoginScreen() {
     }
   });
   return (
-    <YStack flex={1} padding="$8" gap="$8" justifyContent="center">
+    <YStack backgroundColor="$background" flex={1} padding="$8" gap="$8" justifyContent="center">
       <Text fontSize={40} fontWeight="bold" textAlign="center">
         Bookflow
       </Text>

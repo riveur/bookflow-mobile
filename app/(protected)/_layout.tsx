@@ -1,16 +1,38 @@
-import { useSessionStore } from '@/stores/useSessionStore';
-import { Redirect, Stack } from 'expo-router';
+import { FontAwesome } from "@expo/vector-icons";
+import { Redirect, Tabs } from "expo-router";
+import { useTheme } from "tamagui";
+
+import { useSessionStore } from "@/stores/useSessionStore";
 
 export default function Layout() {
-  const { token } = useSessionStore();
+  const { token, isLoading } = useSessionStore();
+  const theme = useTheme();
+
+  if (isLoading) {
+    return null;
+  }
 
   if (!token) {
     return <Redirect href="/auth/login" />;
   }
 
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ title: "Home" }} />
-    </Stack>
+    <Tabs
+      screenOptions={{
+        headerTitle: "Bookflow",
+        tabBarActiveBackgroundColor: theme.background.val,
+        tabBarActiveTintColor: theme.green8.val,
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "Accueil",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome size={28} name="home" color={color} />
+          ),
+        }}
+      />
+    </Tabs>
   );
 }

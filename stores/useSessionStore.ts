@@ -32,10 +32,12 @@ const useSessionStore = create<State & Actions>((set, get) => {
     ...initialState,
     init(state) {
       set({ ...state });
-      setStorageItemAsync(storageKey, state.token);
+      setStorageItemAsync(storageKey, state.token).finally(() => {
+        set({ isLoading: false });
+      });
     },
     clear() {
-      set({ ...initialState });
+      set({ ...initialState, isLoading: false });
       setStorageItemAsync(storageKey, initialState.token);
     },
   };

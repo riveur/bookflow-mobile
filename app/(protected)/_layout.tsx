@@ -1,12 +1,14 @@
-import { FontAwesome } from "@expo/vector-icons";
-import { Redirect, Tabs } from "expo-router";
-import { useTheme } from "tamagui";
+import {} from "@expo/vector-icons";
+import { Redirect, Stack } from "expo-router";
 
 import { useSessionStore } from "@/stores/useSessionStore";
 
+export const unstable_settings = {
+  initialRouteName: "(tabs)",
+};
+
 export default function Layout() {
   const { token, isLoading } = useSessionStore();
-  const theme = useTheme();
 
   if (isLoading) {
     return null;
@@ -17,22 +19,8 @@ export default function Layout() {
   }
 
   return (
-    <Tabs
-      screenOptions={{
-        headerTitle: "Bookflow",
-        tabBarActiveBackgroundColor: theme.background.val,
-        tabBarActiveTintColor: theme.green8.val,
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Accueil",
-          tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="home" color={color} />
-          ),
-        }}
-      />
-    </Tabs>
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    </Stack>
   );
 }

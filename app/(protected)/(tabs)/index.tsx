@@ -1,4 +1,5 @@
 import { FontAwesome } from "@expo/vector-icons";
+import { Link } from "expo-router";
 import { Button, ScrollView, Spinner, XStack, YStack } from "tamagui";
 
 import { BookCard } from "@/components/shared/BookCard";
@@ -25,11 +26,13 @@ export default function HomeScreen() {
       <XStack justifyContent="space-between" alignItems="center">
         <Text fontSize="$6">Liste des livres</Text>
         {roleIs("LIBRARIAN") && (
-          <Button
-            aspectRatio={1}
-            icon={<FontAwesome name="plus" size={16} />}
-            padding="$0"
-          />
+          <Link href="/books/add" asChild>
+            <Button
+              aspectRatio={1}
+              icon={<FontAwesome name="plus" size={16} />}
+              padding="$0"
+            />
+          </Link>
         )}
       </XStack>
       {isLoadingBooks && (

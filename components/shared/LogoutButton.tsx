@@ -13,7 +13,7 @@ const LogoutButton = () => {
   };
   return (
     <Button
-      transparent
+      chromeless
       borderRadius={9999}
       aspectRatio={1}
       p="$0"

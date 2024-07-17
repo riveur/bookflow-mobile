@@ -20,6 +20,7 @@ import { useCategories } from "@/hooks/useCategories";
 import { useDeleteBookMutation } from "@/hooks/useDeleteBookMutation";
 import { useUpdateBookMutation } from "@/hooks/useUpdateBookMutation";
 import { Book, CreateBookInput, CreateBookSchema } from "@/lib/validation";
+import Toast from "react-native-toast-message";
 
 export function UpdateBookForm({ book }: { book: Book }) {
   const { data: authors } = useAuthors();
@@ -35,7 +36,10 @@ export function UpdateBookForm({ book }: { book: Book }) {
     updateBook(data, {
       onSuccess(data) {
         form.reset(data);
-        // toast("Les modifications ont bien été enregistrées");
+        Toast.show({
+          type: "success",
+          text1: "Les modifications ont bien été enregistrées !",
+        });
       },
     });
   };
@@ -43,7 +47,10 @@ export function UpdateBookForm({ book }: { book: Book }) {
   const onDeleteBook = () => {
     deleteBook(book.isbn, {
       onSuccess() {
-        // toast("Le livre a bien été supprimé");
+        Toast.show({
+          type: "success",
+          text1: "Le livre a bien été supprimé !",
+        });
         router.navigate("/");
       },
     });

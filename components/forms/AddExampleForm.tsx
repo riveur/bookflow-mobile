@@ -15,6 +15,7 @@ import {
 import { exampleAvailability, exampleStates } from "@/contents/example";
 import { useAddBookExampleMutation } from "@/hooks/useAddBookExampleMutation";
 import { CreateExampleInput, CreateExampleSchema } from "@/lib/validation";
+import Toast from "react-native-toast-message";
 
 interface AddExampleFormProps {
   isbn: string;
@@ -35,7 +36,10 @@ export const AddExampleForm: React.FC<AddExampleFormProps> = ({ isbn }) => {
     addExample(data, {
       onSuccess() {
         form.reset();
-        // toast("Exemplaire ajouté !");
+        Toast.show({
+          type: "success",
+          text1: "Exemplaire ajouté !",
+        });
       },
     });
   };

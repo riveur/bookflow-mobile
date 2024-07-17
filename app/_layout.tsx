@@ -15,6 +15,8 @@ import { PortalProvider, TamaguiProvider } from "tamagui";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import tamaguiConfig from "@/tamagui.config";
+import Toast from "react-native-toast-message";
+import { toastConfig } from "@/components/ui/Toast";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -79,6 +81,7 @@ function RootLayoutNav() {
                 options={{ headerShown: false }}
               />
             </Stack>
+            <Toast config={toastConfig} />
           </PortalProvider>
         </ThemeProvider>
       </TamaguiProvider>

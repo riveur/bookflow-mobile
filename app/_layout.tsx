@@ -11,7 +11,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
-import { TamaguiProvider } from "tamagui";
+import { PortalProvider, TamaguiProvider } from "tamagui";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import tamaguiConfig from "@/tamagui.config";
@@ -68,10 +68,18 @@ function RootLayoutNav() {
         <ThemeProvider
           value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
         >
-          <Stack>
-            <Stack.Screen name="(protected)" options={{ headerShown: false }} />
-            <Stack.Screen name="auth/login" options={{ headerShown: false }} />
-          </Stack>
+          <PortalProvider shouldAddRootHost>
+            <Stack>
+              <Stack.Screen
+                name="(protected)"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="auth/login"
+                options={{ headerShown: false }}
+              />
+            </Stack>
+          </PortalProvider>
         </ThemeProvider>
       </TamaguiProvider>
     </QueryClientProvider>

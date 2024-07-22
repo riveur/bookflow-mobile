@@ -1,8 +1,9 @@
 import { Stack, useLocalSearchParams } from "expo-router";
-import { Image, ScrollView, Separator, Spinner, YStack } from "tamagui";
+import { Image, ScrollView, Separator, YStack } from "tamagui";
 
 import { UpdateBookForm } from "@/components/forms/UpdateBookForm";
 import { ExampleList } from "@/components/shared/ExampleList";
+import { LoadingScreen } from "@/components/shared/LoadingScreen";
 import { Text } from "@/components/ui/Text";
 import { View } from "@/components/ui/View";
 import { useAuth } from "@/hooks/useAuth";
@@ -27,11 +28,7 @@ export default function BookShowPage() {
     return (
       <>
         <Stack.Screen options={{ headerTitle: "Chargement..." }} />
-        <View flex={1} jc="center" ai="center">
-          <View jc="center" ai="center">
-            <Spinner size="large" />
-          </View>
-        </View>
+        <LoadingScreen />
       </>
     );
   }

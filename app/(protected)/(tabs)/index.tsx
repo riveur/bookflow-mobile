@@ -1,11 +1,12 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { Link } from "expo-router";
-import { Button, ScrollView, Spinner, XStack, YStack } from "tamagui";
+import { Button, ScrollView, XStack, YStack } from "tamagui";
 
 import { BookCard } from "@/components/shared/BookCard";
 import { Text } from "@/components/ui/Text";
 import { useAuth } from "@/hooks/useAuth";
 import { useBooks } from "@/hooks/useBooks";
+import { LoadingScreen } from "@/components/shared/LoadingScreen";
 
 export default function HomeScreen() {
   const {
@@ -35,12 +36,7 @@ export default function HomeScreen() {
           </Link>
         )}
       </XStack>
-      {isLoadingBooks && (
-        <YStack flex={1} justifyContent="center" alignItems="center" gap="$2">
-          <Spinner size="large" color="$gray10" />
-          <Text>Chargement...</Text>
-        </YStack>
-      )}
+      {isLoadingBooks && <LoadingScreen />}
       {isSuccessBooks && books.length !== 0 && (
         <ScrollView showsVerticalScrollIndicator={false}>
           <YStack gap="$4" paddingBottom="$4">

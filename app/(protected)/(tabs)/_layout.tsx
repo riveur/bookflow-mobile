@@ -21,7 +21,16 @@ export default function Layout() {
         options={{
           title: "Accueil",
           tabBarIcon: ({ color }) => (
-            <FontAwesome size={28} name="home" color={color} />
+            <FontAwesome size={24} name="home" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="borrows"
+        options={{
+          title: "Emprunts",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome size={24} name="book" color={color} />
           ),
         }}
       />

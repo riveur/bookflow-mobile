@@ -116,7 +116,7 @@ export const BorrowBookSchema = z.object({
 export const TransactionSchema = z.object({
   id: z.string(),
   date: dateType(),
-  expected_return_date: dateType("PP"),
+  expected_return_date: dateType("PPP"),
   real_return_date: dateType().nullable().optional(),
   status: z.enum(["EMPRUNTE", "ATTENTE_RETOUR", "RENDU"]),
   example_id: z.string(),

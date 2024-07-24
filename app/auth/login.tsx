@@ -73,48 +73,49 @@ export default function LoginScreen() {
           </View>
         )}
         <Form {...form}>
-          <FormContent gap="$2" onSubmit={onSubmit}>
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="john.doe@example.com"
-                      inputMode="email"
-                      autoCapitalize="none"
-                      onChangeText={field.onChange}
-                      onBlur={field.onBlur}
-                      value={field.value}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <YStack></YStack>
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Mot de passe</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="********"
-                      autoCapitalize="none"
-                      secureTextEntry
-                      onChangeText={field.onChange}
-                      onBlur={field.onBlur}
-                      value={field.value}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          <FormContent gap="$4" onSubmit={onSubmit}>
+            <YStack gap="$2">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="john.doe@example.com"
+                        inputMode="email"
+                        autoCapitalize="none"
+                        onChangeText={field.onChange}
+                        onBlur={field.onBlur}
+                        value={field.value}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Mot de passe</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="********"
+                        autoCapitalize="none"
+                        secureTextEntry
+                        onChangeText={field.onChange}
+                        onBlur={field.onBlur}
+                        value={field.value}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </YStack>
             <FormTrigger asChild>
               <Button
                 disabled={form.formState.isSubmitting}

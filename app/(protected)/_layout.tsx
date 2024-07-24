@@ -1,4 +1,3 @@
-import {} from "@expo/vector-icons";
 import { Redirect, Stack } from "expo-router";
 
 import { useSessionStore } from "@/stores/useSessionStore";

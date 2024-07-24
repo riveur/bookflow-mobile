@@ -4,6 +4,9 @@ import { useSessionStore } from "@/stores/useSessionStore";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 
+/**
+ * Get the current user informations
+ */
 export const useAuth = () => {
   const { clear } = useSessionStore();
 

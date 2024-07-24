@@ -2,6 +2,10 @@ import { readNotification } from "@/lib/client";
 import { Notification } from "@/lib/validation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+/**
+ * Mark a notification as read
+ * @param notification The notification to mark as read
+ */
 export const useReadNotificationMutation = (notification: Notification) => {
   const queryClient = useQueryClient();
 

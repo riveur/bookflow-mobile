@@ -10,6 +10,10 @@ interface UseBookExampleParams {
   enabled: boolean;
 }
 
+/**
+ * Get a book example by its ISBN and example ID
+ * @param options The options to fetch the book example
+ */
 export const useBookExample = ({ params, enabled }: UseBookExampleParams) => {
   const { data: user } = useAuth();
   return useQuery({

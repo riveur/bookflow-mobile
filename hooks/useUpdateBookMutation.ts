@@ -2,6 +2,10 @@ import { updateBook } from "@/lib/client";
 import { CreateBookInput } from "@/lib/validation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+/**
+ * Update a book
+ * @param isbn The ISBN of the book to update
+ */
 export function useUpdateBookMutation(isbn: string) {
   const queryClient = useQueryClient();
 

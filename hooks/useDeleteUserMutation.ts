@@ -1,6 +1,9 @@
 import { deleteUser } from "@/lib/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+/**
+ * Delete a user
+ */
 export function useDeleteUserMutation() {
   const queryClient = useQueryClient();
 

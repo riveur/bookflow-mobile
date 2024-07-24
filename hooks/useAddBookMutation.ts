@@ -2,6 +2,9 @@ import { addBook } from "@/lib/client";
 import { Author, Category } from "@/lib/validation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+/**
+ * Add a new book
+ */
 export function useAddBookMutation() {
   const queryClient = useQueryClient();
 
